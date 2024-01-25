@@ -25,7 +25,7 @@ public class MatchingService {
             if(!animalList.contains(animal)) animalList.add(animal);
         }
     }
-    public void makeOptionList(List<Options> optionList){
+    public void makeOptionList(List<Options> optionList, String userID){
 
     }
     public String matching(List<Animal> animalList, List<Options> optionList){

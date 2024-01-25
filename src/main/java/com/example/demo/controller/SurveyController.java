@@ -27,12 +27,20 @@ public class SurveyController {
         this.surveyService = surveyService;
     }
 
-    @GetMapping("/hyunn815/survey")
-    public List<Questions> questionsList() {
-        return surveyService.getAllQuestions();
+    @GetMapping("/{user_id}/survey")
+    public List<String> questionsList() {
+        List<Questions> questionsList = surveyService.getAllQuestions();
+        List<String> contentList = new ArrayList<>();
+
+        for (Questions question : questionsList) {
+            String content = question.getContent();
+            contentList.add(content);
+        }
+
+        return contentList;
     }
 
-    @PostMapping("/hyunn815/survey")
+    @PostMapping("/{user_id}/survey")
     public String getOptionsList(@RequestBody List<UserKeywordsDTO> userKeywordsList) {
         for (UserKeywordsDTO userKeywordsDTO : userKeywordsList) {
             surveyService.keywordsRegister(userKeywordsDTO);

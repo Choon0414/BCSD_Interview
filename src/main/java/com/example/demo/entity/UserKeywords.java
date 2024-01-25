@@ -21,8 +21,4 @@ public class UserKeywords {
 
     @Column(name = "option_id", nullable = false)
     private int optionId;
-
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "user_id", referencedColumnName = "id")
-//    private User user;
 }
