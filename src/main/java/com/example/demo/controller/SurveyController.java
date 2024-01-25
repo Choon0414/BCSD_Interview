@@ -37,6 +37,6 @@ public class SurveyController {
         for (UserKeywordsDTO userKeywordsDTO : userKeywordsList) {
             surveyService.keywordsRegister(userKeywordsDTO);
         }
-        return "redirect:/hyunn815/matching";
+        return "매칭 링크로 이동 하고싶은데..";
     }
 }

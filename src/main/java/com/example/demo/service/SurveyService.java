@@ -18,7 +18,6 @@ import java.util.Optional;
 public class SurveyService {
     private final QuestionsRepository questionRepository;
     private final UserKeywordsRepository userKeywordsRepository;
-    private AnimalKeywordsRepository animalKeywordsRepository;
 
     @Autowired
     public SurveyService(QuestionsRepository questionRepository, UserKeywordsRepository userKeywordsRepository) {
@@ -39,19 +38,5 @@ public class SurveyService {
         return userKeywords.getUserId();
     }
 
-    public void makeAnimalDTO(List<Animal> animalList, UserKeywordsDTO userKeywordsDTO){
-        int optionId = userKeywordsDTO.getOptionId();
-        Optional<Animal> optionalAnimal = animalKeywordsRepository.findByAnimalId(optionId);
-        if(optionalAnimal.isPresent()){
-            Animal animal = optionalAnimal.get();
-            if(!animalList.contains(animal)) animalList.add(animal);
-        }
-    }
-    public void makeOptionList(List<Options> optionList){
 
-    }
-    public String matching(List<Animal> animalList, List<Options> optionList){
-
-        return null;
-    }
 }
