@@ -1,0 +1,24 @@
+package com.example.demo.entity;
+
+import jakarta.persistence.*;
+import lombok.*;
+
+@Builder
+@Entity(name = "animal_keywords")
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
+@ToString
+public class AnimalKeywords {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ak_id", nullable = false)
+    private Long akId;
+
+    @Column(name = "animal_id", nullable = false)
+    private int animalId;
+
+    @Column(name = "option_id", nullable = false)
+    private int optionId;
+}
