@@ -1,35 +1,63 @@
 package com.example.demo.service;
 
 import com.example.demo.DTO.AnimalDTO;
+import com.example.demo.DTO.OptionDTO;
 import com.example.demo.DTO.UserKeywordsDTO;
 import com.example.demo.entity.*;
 import com.example.demo.repository.*;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.stream.Collectors;
+import java.util.*;
 
 @Service
+@RequiredArgsConstructor
 public class MatchingService {
-    private AnimalKeywordsRepository animalKeywordsRepository;
+    private final AnimalKeywordsRepository animalKeywordsRepository;
+    private final QuestionsRepository questionsRepository;
+    private final OptionsRepository optionsRepository;
+    private final UserKeywordsRepository userKeywordsRepository;
+    private final AnimalRepository animalRepository;
 
-    public void makeAnimalDTO(List<Animal> animalList, UserKeywordsDTO userKeywordsDTO){
-        int optionId = userKeywordsDTO.getOptionId();
-        Optional<Animal> optionalAnimal = animalKeywordsRepository.findByAnimalId(optionId);
-        if(optionalAnimal.isPresent()){
-            Animal animal = optionalAnimal.get();
-            if(!animalList.contains(animal)) animalList.add(animal);
+    // 사용자와 겹치는 동물 리스트 생성
+    public List<AnimalDTO> getAnimalDTOLIst(List<OptionDTO> optionDTOList){
+        List<AnimalDTO> animalDTOList = new ArrayList<>();
+        for(OptionDTO dto: optionDTOList){
+            int optionId = dto.getOptionId();
+            List<AnimalKeywords> animalKeywordsList = animalKeywordsRepository.findByAnimalId(optionId);
+            for (AnimalKeywords animalKeywords : animalKeywordsList) {
+                Optional<Animal> optionalAnimal = animalRepository.findByAnimalId(animalKeywords.getAnimalId());
+                if (optionalAnimal.isPresent()) {
+                    AnimalDTO animalDTO = AnimalDTO.builder()
+                            .animalId(optionalAnimal.get().getAnimalId())
+                            .animalName(optionalAnimal.get().getAnimalName())
+                            .build();
+                    if (!animalDTOList.contains(animalDTO)) {
+                        animalDTOList.add(animalDTO);
+                    }
+                }
+            }
         }
+        return animalDTOList;
     }
-    public void makeOptionList(List<Options> optionList, String userID){
 
+    // 사용자의 키워드 리스트 생성
+    public List<OptionDTO> getOptionsDTOList(String userId){
+        List<UserKeywords> optionsList = userKeywordsRepository.findAllByUserId(userId);
+        List<OptionDTO> optionsDTOList = new ArrayList<>();
+        for (UserKeywords option: optionsList) {
+            int optionId = option.getOptionId();
+            OptionDTO optionsDTO = OptionDTO.builder()
+                    .optionId(optionId)
+                    .content(optionsRepository.findByOptionId(optionId).get().getContent())
+                    .build();
+            optionsDTOList.add(optionsDTO);
+        }
+        return optionsDTOList;
     }
-    public String matching(List<Animal> animalList, List<Options> optionList){
 
+    // 매칭된 동물들 반환
+    public String matching(List<AnimalDTO> animalDTOList, List<OptionDTO> optionDTOList){
         return null;
     }
 }

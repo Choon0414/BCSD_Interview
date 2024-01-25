@@ -16,7 +16,7 @@ public class Animal {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "animal_id", nullable = false)
-    private long animalId;
+    private int animalId;
 
     @Column(name = "animal_name", nullable = false, length = 255, unique = true)
     private String animalName; //유저이름

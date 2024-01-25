@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 public class UserService {
     private final UserRepository userRepository;
 
+    // 회원가입
     public String signup(UserDTO dto) {
         User user = User.builder()
                 .userId(dto.getUserId())
@@ -20,7 +21,6 @@ public class UserService {
                 .password(dto.getPassword())
                 .email(dto.getEmail())
                 .build();
-        userRepository.save(user);
-        return user.getUserId();
+        return userRepository.save(user).getUserId();
     }
 }
