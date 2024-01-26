@@ -7,5 +7,4 @@ import lombok.Getter;
 @Builder
 public class OptionDTO {
     private int optionId;
-    private String content;
 }

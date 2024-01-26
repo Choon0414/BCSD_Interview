@@ -9,7 +9,6 @@ import lombok.*;
 @NoArgsConstructor
 @Getter
 @Setter
-@ToString
 public class AnimalKeywords {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
