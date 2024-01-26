@@ -2,17 +2,14 @@ package com.example.demo.DTO;
 
 import lombok.Builder;
 import lombok.Getter;
-import lombok.Setter;
 
 import java.util.Objects;
 
 @Getter
-@Setter
 @Builder
 public class AnimalDTO {
     private int animalId;
     private String animalName;
-    private String animalPref;
     private int sum = 0;    // 추천 순위에 사용할 동물의 가중치 합
 
     @Override

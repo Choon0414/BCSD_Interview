@@ -5,16 +5,19 @@ import com.example.demo.entity.Questions;
 import com.example.demo.entity.UserKeywords;
 import com.example.demo.repository.QuestionsRepository;
 import com.example.demo.repository.UserKeywordsRepository;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-@RequiredArgsConstructor
 public class SurveyService {
     private final QuestionsRepository questionRepository;
     private final UserKeywordsRepository userKeywordsRepository;
+
+    public SurveyService(QuestionsRepository questionRepository, UserKeywordsRepository userKeywordsRepository){
+        this.questionRepository = questionRepository;
+        this.userKeywordsRepository = userKeywordsRepository;
+    }
 
     // 질문 모두 불러오기
     public List<Questions> getAllQuestions() {
@@ -22,9 +25,9 @@ public class SurveyService {
     }
 
     // 사용자의 키워드 저장하기
-    public String keywordsRegister(UserKeywordsDTO dto) {
+    public String keywordsRegister(UserKeywordsDTO dto, String user_id) {
         UserKeywords userKeywords = UserKeywords.builder()
-                .userId(dto.getUserId())
+                .userId(user_id)
                 .optionId(dto.getOptionId())
                 .build();
         return userKeywordsRepository.save(userKeywords).getUserId();
