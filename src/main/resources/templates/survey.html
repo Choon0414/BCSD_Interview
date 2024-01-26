@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Survey Questions</title>
+</head>
+<body>
+<h1>Survey Questions</h1>
+<form th:action="@{'/users/' + ${user_id} + '/survey'}" method="post">
+    <ul>
+        <li th:each="content : ${contentList}" th:text="${content}"></li>
+    </ul>
+    <label for="optionIds">Enter option_ids (comma separated):</label>
+    <input type="text" id="optionIds" name="optionIds" required>
+    <button type="submit">Submit</button>
+</form>
+</body>
+</html>

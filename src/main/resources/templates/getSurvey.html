@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Matching Page</title>
+</head>
+<body>
+<h1>Matching Options</h1>
+<ul>
+    <!-- 여기서 matchingService.getOptionsDTOList(user_id) 값을 표시 -->
+    <li th:each="option : ${optionsList}">
+        <span th:text="${option.optionId}"></span>
+    </li>
+</ul>
+
+<!-- POST 요청을 보내는 버튼 -->
+<form th:action="@{'/users/'+${user_id}+'/match'}" method="post">
+    <input type="submit" value="Match Animals">
+</form>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>동물 순위</title>
+</head>
+<body>
+<h1>
+    <small>
+        <span th:text="${user_id} + '님과 어울리는'" style="font-size: 20px;"></span>
+    </small>
+    동물 순위
+</h1>
+<table>
+    <thead>
+    <tr>
+        <th>순위</th>
+        <th>&nbsp;</th>
+        <th>동물 이름</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="animal, index : ${animalList}">
+        <td th:text="${index.index + 1}"></td>
+        <td>&nbsp;</td>
+        <td th:text="${animal.animalName}"></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
+
